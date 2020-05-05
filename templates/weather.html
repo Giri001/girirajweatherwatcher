@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Weather App</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<style>
+	#main {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	</style>
+</head>
+
+<body>
+	<br>
+	<br>
+	<!-- Search form -->
+	<!-- Search form -->
+	<center>
+		<button class="btn btn btn-dark" style='margin-right:10px;'><a style="text-decoration:none;color:white;" href='/update_all'>Update All</a></button>
+		<button type="button" class="btn btn-danger" style='margin-left:10px;'><a style='color:white;text-decoration:none;' href='/delete_all'>Delete All</a></button>
+	</center>
+	<center>
+		<form action='/post' method='POST' class="form-inline d-flex justify-content-center md-form form-sm active-purple active-purple-2 mt-2"> <i class="fas fa-search" aria-hidden="true"></i>
+			<input name='city' id='city' class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search">
+			<br>
+			<br>
+			<button style='margin-left:10px;padding-left:15px;padding-right:15px' class="btn btn-outline-primary">Search</button>
+		</form>
+	</center>
+	<br>
+{% if on %}
+	{% if status %}
+		<div class="alert alert-success" role="alert">{{city}} is added Successfully !</div>
+	{% else %}
+		<div class="alert alert-danger" role="alert">{{city}} is not found !</div>
+	{% endif %}
+{% else %}
+
+{% endif %}
+
+{%if available %}
+	<div class="alert alert-info" role="alert">{{city}} is already available !</div>
+{% else %}
+
+{% endif %}
+	
+
+	<br>
+	<div class="d-flex align-content-around flex-wrap"> {% for i in weather %}
+		<div id='main' class="card text-white bg-success mb-3" style="max-width: 18rem;margin:20px">
+			<div class="card-header"><img src='http://openweathermap.org/img/w/{{i.icon}}.png' alt='Image'>City: {{ i.city }}</div>
+			<div class="card-body">
+				<h5 class="card-title">Temperature : {{ i.temperature }}</h5>
+				<p class="card-text">Description : {{ i.description }}</p>
+				<center>
+					<button type="button" class="btn btn-danger"><a style='color:white;text-decoration:none;' href='/delete/{{i.id}}'>Delete</a></button>
+				</center>
+			</div>
+		</div> {% endfor %} </div>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
+</html>
